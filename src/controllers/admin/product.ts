@@ -6,18 +6,18 @@ import { Category } from '../../interfaces/category';
 export default class ProductController {
   static async addCategory(req: Request, res: Response) {
     const { body } = req;
-    const categoryData: Category ={
-        category:body.service;
-    }
-    try{
-const category = await ProductService.addCategory(categoryData)
-dispatcher.DispatchSuccessMessage(
-    res,
-    'Category added sucessfully',
-    category,
-  );
-    }catch(err:any){
-        dispatcher.DispatchErrorMessage(res, err);
+    const categoryData: Category = {
+      category: body.category,
+    };
+    try {
+      const category = await ProductService.addCategory(categoryData);
+      dispatcher.DispatchSuccessMessage(
+        res,
+        'Category added sucessfully',
+        category,
+      );
+    } catch (err: any) {
+      dispatcher.DispatchErrorMessage(res, err);
     }
   }
   static async addProduct(req: Request, res: Response) {
