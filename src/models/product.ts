@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import { Product as ProductInterface } from '../../interfaces/product';
+import { Product as ProductInterface } from '../interfaces/product';
 
 // Define the schema using the User interface
 const product = new Schema<ProductDocument>({

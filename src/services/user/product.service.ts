@@ -2,20 +2,6 @@ import Category from '../../models/category';
 import Product from '../../models/product';
 
 export default class ProductService {
-  static async addCategory(data: any) {
-    try {
-      return await Category.create(data);
-    } catch (err: any) {
-      throw err;
-    }
-  }
-  static async addProduct(data: any) {
-    try {
-      return await Product.create(data);
-    } catch (err: any) {
-      throw err;
-    }
-  }
 
   static async getCategory() {
     try {

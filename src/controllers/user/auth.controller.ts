@@ -1,7 +1,7 @@
 import { User } from "../../interfaces/user"; 
 import { Request, Response } from "express";
 import dispatcher from "../../utils/dispatcher";
-import AuthService from "../../services/v1/auth.service";
+import AuthService from "../../services/user/auth.service";
 import logger from "../../utils/logger";
 import { hashPassword, comparePasswords, jsonwebtoken } from "../../utils/functions";
 
