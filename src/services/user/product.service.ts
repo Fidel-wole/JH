@@ -2,7 +2,6 @@ import Category from '../../models/category';
 import Product from '../../models/product';
 
 export default class ProductService {
-
   static async getCategory() {
     try {
       return await Category.find();
@@ -14,6 +13,14 @@ export default class ProductService {
   static async getProduct() {
     try {
       return await Product.find();
+    } catch (err: any) {
+      throw err;
+    }
+  }
+
+  static async getProductByCategory(categoryId: any) {
+    try {
+      return await Product.find({ category: categoryId });
     } catch (err: any) {
       throw err;
     }
