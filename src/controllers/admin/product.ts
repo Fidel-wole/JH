@@ -21,27 +21,32 @@ export default class ProductController {
     }
   }
   static async addProduct(req: Request, res: Response) {
-    const { body } = req;
+    const { body, files } = req;
+    const imageUrls = files
+      ? (files as Express.MulterS3.File[]).map((file) => file.location)
+      : [];
+
     const productData: Product = {
       product_name: body.product_name,
-      category: body.category,
+      categories: body.categories,
+      images: imageUrls,
       description: body.description,
       price: body.price,
       colors: body.colors,
       size: body.size,
     };
+
     try {
       const product = await ProductService.addProduct(productData);
       dispatcher.DispatchSuccessMessage(
         res,
-        'Product added sucessfully',
+        'Product added successfully',
         product,
       );
     } catch (err: any) {
       dispatcher.DispatchErrorMessage(res, err);
     }
   }
-
   static async getCategory(req: Request, res: Response) {
     try {
       const category = await ProductService.getCategory();
