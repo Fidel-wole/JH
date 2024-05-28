@@ -1,6 +1,7 @@
 import ProductService from '../../services/user/product.service';
 import { Request, Response } from 'express';
 import dispatcher from '../../utils/dispatcher';
+import { CustomRequest } from '../../interfaces/custom-request';
 
 export default class ProductController {
   static async getCategory(req: Request, res: Response) {
@@ -45,5 +46,25 @@ export default class ProductController {
     } catch (err: any) {
       dispatcher.DispatchErrorMessage(res, err);
     }
+  }
+  static async rateProduct(req: Request, res: Response) {
+    const { productId, rating } = req.body;
+    const userId = (req as CustomRequest).userId; // Assuming you have user authentication and user ID is available in req.user
+
+
+    if (!productId || typeof rating !== 'number') {
+   dispatcher.DispatchBadRequestMessage(res, "Product ID and rating are required")
+    }else{
+    try {
+      const product = await ProductService.addRating(productId, userId, rating);
+      dispatcher.DispatchSuccessMessage(
+        res,
+        'Rating added successfully',
+        product,
+      );
+    } catch (err: any) {
+      dispatcher.DispatchErrorMessage(res, err);
+    }
+  }
   }
 }

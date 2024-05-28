@@ -50,4 +50,11 @@ export default class {
       message: appConfig.error.notImplemented.description,
     });
   }
+  static DispatchBadRequestMessage(res:Response,  message: string){
+    res.status(400).json({
+      code: appConfig.error.badRequest.code,
+      status: appConfig.error.badRequest.description,
+      message:message
+    });
+  }
 }

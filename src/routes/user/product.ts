@@ -1,5 +1,6 @@
 import { Router } from "express";
 import ProductController from "../../controllers/user/product.controller";
+import authMiddleWare from "../../middlewares/jwtverify";
 
 const userProductRoute = Router();
 
@@ -11,5 +12,8 @@ userProductRoute.get("/user/products", ProductController.getProduct);
 
 // Route to get products by category
 userProductRoute.get("/user/products/:categoryId", ProductController.getProductByCategory);
+
+// Route to add ratong;
+userProductRoute.post("/user/product/rate", authMiddleWare, ProductController.rateProduct)
 
 export default userProductRoute;

@@ -2,6 +2,12 @@ import mongoose, { Schema, Document } from 'mongoose';
 import { Product as ProductInterface } from '../interfaces/product';
 
 // Define the schema using the User interface
+
+const ratingSchema = new Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  rating: { type: Number, required: true, min: 1, max: 5 },
+});
+
 const product = new Schema<ProductDocument>({
   product_name: { type: String, required: true },
   categories: {
@@ -11,7 +17,8 @@ const product = new Schema<ProductDocument>({
   },
   images: { type: [String], required: true },
   description: { type: String, required: true },
-  rating: { type: String },
+  ratings: { type: [ratingSchema], default: [] }, // Default to an empty array
+  averageRating: { type: Number, default: 0 },
   price: { type: String },
   colors: { type: [String] },
   size: { type: [String] },
