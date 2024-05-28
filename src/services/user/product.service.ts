@@ -29,28 +29,24 @@ export default class ProductService {
   static async addRating(productId: any, userId: any, rating: number) {
     const product = await Product.findById(productId);
 
-    if (!product) {
-      throw new Error('Product not found');
-    }
-
 
     // Check if user has already rated the product
-    const existingRating = product.ratings!.find((r:any) => r.userId.toString() === userId);
+    const existingRating = product!.ratings!.find((r:any) => r.userId.toString() === userId);
 
     if (existingRating) {
       // Update the existing rating
       existingRating.rating = rating;
     } else {
       // Add a new rating
-      product.ratings!.push({ userId, rating });
+      product!.ratings!.push({ userId, rating });
     }
 
     // Calculate the average rating
-    const totalRatings = product.ratings!.length;
-    const sumRatings = product.ratings!.reduce((sum, r) => sum + r.rating, 0);
-    product.averageRating = sumRatings / totalRatings;
+    const totalRatings = product!.ratings!.length;
+    const sumRatings = product!.ratings!.reduce((sum, r) => sum + r.rating, 0);
+    product!.averageRating = sumRatings / totalRatings;
 
-    await product.save();
+    await product!.save();
 
     return product;
   }

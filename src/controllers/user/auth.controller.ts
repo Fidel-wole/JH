@@ -16,7 +16,6 @@ export class AuthController {
       phone_number: body.phone_number,
       password: body.password,
       address: body.address,
-      stripeCustomerId: ""
     };
 
     try {
