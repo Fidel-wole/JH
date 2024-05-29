@@ -16,4 +16,8 @@ userProductRoute.get("/user/products/:categoryId", ProductController.getProductB
 // Route to add ratong;
 userProductRoute.post("/user/product/rate", authMiddleWare, ProductController.rateProduct)
 
+userProductRoute.post("/user/add-cart", authMiddleWare, ProductController.addProductToCart)
+
+userProductRoute.get("/user/cart", authMiddleWare, ProductController.getUserCart)
+
 export default userProductRoute;

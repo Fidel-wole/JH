@@ -1,6 +1,6 @@
 import Category from '../../models/category';
 import Product from '../../models/product';
-
+import Cart from '../../models/cart';
 export default class ProductService {
   static async getCategory() {
     try {
@@ -50,5 +50,47 @@ export default class ProductService {
 
     return product;
   }
+   
+  static async addProductToCart(userId: string, productId: string, quantity: number){
+    try{
+    const product = await Product.findById(productId);
+    if (!product) {
+      throw new Error("Product not found");
+    }
+  
+    let cart = await Cart.findOne({ user: userId });
+  
+    if (cart) {
+      const itemIndex = cart.items.findIndex((item) => item.product.toString() === productId);
+      if (itemIndex > -1) {
+        cart.items[itemIndex].quantity += quantity;
+      } else {
+        cart.items.push({ product: productId, quantity });
+      }
+      cart = await cart.save();
+    } else {
+      cart = await Cart.create({
+        userId: userId,
+        items: [{ product: productId, quantity }],
+      });
+    }
+  
+    return cart;
+  }catch(err:any){
+    throw err
+  }
+  }
 
+  static async getUserCart(userId:any){
+    try{
+      const cart = await Cart.findOne({userId:userId}).populate('items.product')
+     if(!cart){
+      throw new Error("Cart not found")
+     }
+     return cart
+    }catch(err:any){
+      throw err
+    }
+  }
 }
+

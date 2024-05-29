@@ -15,15 +15,14 @@ const user= new Schema<UserDocument>({
   password: { type: String, required: true },
   passwordResetToken: { type: String },
   otp_verification_code:{ type: String },
+  otp_expires_at:{type:Date},
   role: {
     type: String,
     enum: ["user", "admin"],
     default: 'user',
-  },
-  stripeCustomerId:{type:String}
+  }
 });
 
 interface UserDocument extends UserInterface, Document {}
 const User = mongoose.model<UserDocument>("User", user);
-
 export default User;

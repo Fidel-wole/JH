@@ -8,7 +8,8 @@ export interface User {
     picture?:string;
     emailVerificationToken?:string;
     isEmailVerified?:boolean;
-    otp_verification_code?: number;
+    otp_verification_code?: string;
+    otp_expires_at:Date;
     password: string;
     passwordResetToken?:string;
     role?:string;

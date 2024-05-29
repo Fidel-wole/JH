@@ -67,4 +67,27 @@ export default class ProductController {
     }
   }
   }
+
+  static async addProductToCart(req:Request, res:Response){
+    const {productId, quantity } = req.body;
+    const userId =(req as CustomRequest).userId;
+    try {
+      const cart = await ProductService.addProductToCart(userId, productId, quantity);
+    dispatcher.DispatchSuccessMessage(res, "Product added to cart", cart)
+    } catch (error:any) {
+     dispatcher.DispatchErrorMessage(res, error.message)
+    }
+  }
+
+  static async getUserCart(req:Request, res:Response){
+    const userId = (req as CustomRequest).userId;
+    try{
+     const cart = await ProductService.getUserCart(userId);
+
+      dispatcher.DispatchSuccessMessage(res, "Cart fetched sucessfully", cart)
+     
+    }catch(err:any){
+      dispatcher.DispatchErrorMessage(res, err.message)
+    }
+  }
 }
