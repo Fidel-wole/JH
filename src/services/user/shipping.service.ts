@@ -26,7 +26,7 @@ export default class ShippingService {
 
   static async getShippingAddress(userId: any) {
     try {
-      return await ShippingAddress.find(userId);
+      return await ShippingAddress.findOne({userId:userId});
     } catch (err: any) {
       throw err;
     }
