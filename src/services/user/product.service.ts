@@ -58,7 +58,7 @@ export default class ProductService {
       throw new Error("Product not found");
     }
   
-    let cart = await Cart.findOne({ user: userId });
+    let cart = await Cart.findOne({ userId: userId });
   
     if (cart) {
       const itemIndex = cart.items.findIndex((item) => item.product.toString() === productId);

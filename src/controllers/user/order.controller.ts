@@ -14,4 +14,18 @@ export default class OrderController {
       dispatcher.DispatchErrorMessage(res, err);
     }
   }
+
+  static async getOrders(req: Request, res: Response) {
+    const userId = (req as CustomRequest).userId;
+    try {
+      const orders = await OrderService.getOrders(userId);
+      dispatcher.DispatchSuccessMessage(
+        res,
+        'Order fetched sucessfully',
+        orders,
+      );
+    } catch (err: any) {
+      dispatcher.DispatchErrorMessage(res, err);
+    }
+  }
 }

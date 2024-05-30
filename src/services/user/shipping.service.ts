@@ -8,4 +8,12 @@ export default class ShippingService{
             throw err
         }
     }
+
+    static async getShippingAddress(userId:any){
+        try{
+            return await ShippingAddress.find(userId)
+        }catch(err:any){
+            throw err
+        }
+    }
 }

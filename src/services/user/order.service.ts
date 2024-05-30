@@ -42,4 +42,11 @@ export default class OrderService {
       throw err.message;
     }
   }
+  static async getOrders(userId:any){
+    try{
+return await Order.find({userId:userId});
+    }catch(err:any){
+        throw err.message
+    }
+  }
 }

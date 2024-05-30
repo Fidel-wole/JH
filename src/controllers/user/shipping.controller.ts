@@ -23,11 +23,26 @@ export default class ShippingController {
       address: [address],
     };
 
+    try {
+      const shippingAddress =
+        await ShippingService.addShippingAddress(shippingAddressData);
+      dispatcher.DispatchSuccessMessage(
+        res,
+        'Shipping address added',
+        shippingAddress,
+      );
+    } catch (err: any) {
+      dispatcher.DispatchErrorMessage(res, err);
+    }
+  }
+
+  static async getShippingAddress(req:Request, res:Response){
+    const userId = (req as CustomRequest).userId;
     try{
-const shippingAddress = await ShippingService.addShippingAddress(shippingAddressData);
-dispatcher.DispatchSuccessMessage(res, "Shipping address added", shippingAddress)
+    const shippingAddress = await ShippingService.getShippingAddress(userId);
+    dispatcher.DispatchSuccessMessage(res, "Shipping address fetched sucessfully", shippingAddress)
     }catch(err:any){
-        dispatcher.DispatchErrorMessage(res, err)
+   dispatcher.DispatchErrorMessage(res, err);
     }
   }
 }
