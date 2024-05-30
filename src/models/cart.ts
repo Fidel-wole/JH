@@ -4,9 +4,9 @@ import { CartItem as CartItemInterface } from '../interfaces/cart';
 const CartItemSchema = new Schema<CartItemDocument>({
     product:{type:Schema.Types.ObjectId, ref:"Product"},
     quantity:{type:Number, required:true}
-})
+});
 const cart = new Schema<CartDocument>({
-    userId: { type: String, required: true },
+    userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     items:[CartItemSchema]
 });
 

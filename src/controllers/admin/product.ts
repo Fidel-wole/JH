@@ -1,5 +1,5 @@
 import ProductService from '../../services/admin/product';
-import { Product } from '../../interfaces/product';
+import { ProductInterface } from '../../interfaces/product';
 import { Request, Response } from 'express';
 import dispatcher from '../../utils/dispatcher';
 import { Category } from '../../interfaces/category';
@@ -26,7 +26,7 @@ export default class ProductController {
       ? (files as Express.MulterS3.File[]).map((file) => file.location)
       : [];
 
-    const productData: Product = {
+    const productData: ProductInterface = {
       product_name: body.product_name,
       categories: body.categories,
       images: imageUrls,

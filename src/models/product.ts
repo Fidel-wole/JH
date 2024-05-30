@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import { Product as ProductInterface } from '../interfaces/product';
+import { ProductInterface } from '../interfaces/product';
 
 // Define the schema using the User interface
 
@@ -19,7 +19,7 @@ const product = new Schema<ProductDocument>({
   description: { type: String, required: true },
   ratings: { type: [ratingSchema], default: [] }, // Default to an empty array
   averageRating: { type: Number, default: 0 },
-  price: { type: String },
+  price: { type: Number },
   colors: { type: [String] },
   size: { type: [String] },
 });
